@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ locale_language_id }}"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="{{ locale_language_id }}"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="{{ locale_language_id }}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ locale_language_id }}"> <!--<![endif]-->
+
+
+{% block document_head %}
+	<head>
+  		{% block title %}<title>{{app_name}}</title>{% endblock %}
+
+		<!-- All meta tags from config files -->
+	    {% block metadata %}
+			{{ meta_tags_code }}
+	    {% endblock %}
+
+		{% block favicons %}
+		    <link rel="icon" href="{{brand_favicon}}" sizes="32x32">
+		    {% if is_mobile %}
+				<!-- For iPhone -->
+				<link rel="apple-touch-icon-precomposed" href="{{brand_favicon}}?v=1">
+				<!-- For Windows Phone -->
+				<meta name="msapplication-TileColor" content="#00bcd4">
+				<meta name="msapplication-TileImage" content="{{brand_favicon}}?v=1">
+		    {% endif %}
+		{% endblock %}
+
+	  	<!-- CSS  -->
+	  	{% block stylesheets %}
+	  		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  		<link href="/{{theme}}/materialize/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">		    
+		    <link href="/{{theme}}/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+		    <style type="text/css">
+		    	html{
+		    		color:#1C5A9A;
+		    	}
+		    	.shapers-blue{
+		    		background-color: #165C9B!important;
+		    	}
+		    	.shapers-blue-text{
+		    		color: #165C9B;
+		    	}
+	    		.toast-success{ color: #2EF97D!important; line-height: 18px; }
+	    		.toast-danger{ color: #EF1515!important; line-height: 18px; }
+	    		.toast-warning{ color: #fdd835!important; line-height: 18px; }
+	    		.toast-info{ color: #29b6f6!important; line-height: 18px; }
+	    		@-webkit-keyframes pulsate {
+				    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+				    50% {opacity: 1.0;}
+				    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+				}
+
+				.icon-block {
+				  padding: 0 15px;
+				}
+				.icon-block .material-icons {
+				  font-size: inherit;
+				}
+				ul li{
+					font-family: roboto-black!important;
+				}
+				.g-recaptcha{
+					  margin-left: 23%;
+  					  -webkit-transform: scale(0.8);
+  					  transform: scale(0.8);
+				}
+				.slider .slides li .caption{
+					/*top:10%!important;*/
+				}
+	    	</style>
+		    {% block page_css %}{% endblock %}
+		{% endblock %}
+		
+		<!-- All google, mixpanel and analytics tags from config files. -->
+		{% block analytics %}
+			{{ google_analytics_code }}
+		{% endblock %}
+	    
+	    <!-- All JavaScript at the bottom, except these. -->
+		{% block priority_js %}
+			<script type="text/javascript" src="/boilerplate/webcomponents/bower_components/webcomponentsjs/webcomponents.min.js"></script>	
+    		<script type="text/javascript" src="/boilerplate/js/libs/modernizr-2.7.1.min.js"></script>
+   		 	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
+		{% endblock %}
+
+		<!--  POLYMER   -->
+		{% block webcomponents %}
+			{% block page_components %}{% endblock %}
+		{% endblock %} 
+
+	</head>
+{% endblock %}
+
+{% block document_body %}
+	<body>
+
+		{% block navbar %}
+			<!-- START NAVBAR -->
+			<nav style="background-color: transparent;position: fixed;border-bottom: none; z-index: 9999999;" class="z-depth-0">
+				<div class="nav-wrapper" style="">
+				  <a href="{{uri_for("landing")}}" class="brand-logo"><img src="{{brand_logo}}?v=1" style="height:65px;"></a>
+				  <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-more-vert"></i></a>
+				  <ul id="nav-mobile" class="right hide-on-med-and-down">
+				    <li id="nav-shapers"><a href="{{uri_for("shapers")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Shapers</a></li>
+				    <li id="nav-blog"><a href="{{uri_for("blog")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Blog</a></li>
+				    <li id="nav-medium"><a href="https://medium.com/search?q=Globalshapermty" target="_blank" class="modal-trigger menu-item" style="color:#1C5A9A">Medium</a></li>
+				  </ul>
+				  <ul class="side-nav" id="mobile-demo">
+				    <li id="nav-shapers"><a href="{{uri_for("shapers")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Shapers</a></li>
+				    <li id="nav-blog"><a href="{{uri_for("blog")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Blog</a></li>
+				    <li id="nav-medium"><a href="https://medium.com/search?q=Globalshapermty" target="_blank" class="modal-trigger menu-item" style="color:#1C5A9A">Medium</a></li>
+				  </ul>
+				</div>
+			</nav>
+			<!-- END NAVBAR -->
+		{% endblock %}
+
+		{% block header_content %}
+			<div class="parallax-container z-depth-3">
+				<div class="section no-pad-bot">
+				  <div class="container">
+				    <br><br>{%if not is_mobile %}<br><br><br><br>{% endif %}
+				    <h1 class="header center {{brand_color}}-text text-lighten-2 " style="text-shadow: white 1px 1px;">{{app_name}}</h1>
+				    <div class="row center">
+				      <h5 class="header col s12 white-text light">Una comunidad del Foro Económico Mundial</h5>
+
+				    </div>
+				    <div class="row center">
+				    </div>
+				    <br>
+				    <br>
+				  </div>
+				</div>
+				<div class="parallax"><img src="/{{theme}}/materialize/images/landing/monterrey.jpg?v=1" alt="Unsplashed background img 1" style="-webkit-filter: brightness(115%); display: block; transform: translate3d(-50%, 351px, 0px);"></div>
+			</div>
+		{% endblock %}
+
+		{% block body_content %}
+			<div class="container">
+				<div class="section">
+
+				  <div class="row">
+				   	<h3 class="col s12 light center header grey-text">¿Qué es Global Shapers Monterrey?</h3>
+				    <div class="col s12 m4">
+				      <div class="icon-block">
+				        <h2 class="center {{brand_color}}-text"><i class="mdi-image-blur-circular" style="font-size: 45px;"></i></h2>
+				        <h5 class="center">Global Shapers Community</h5>
+
+				        <p class="light">La Comunidad Global Shapers es una red de hubs desarrollado y dirigido por los jóvenes que son excepcionales en su potencial, sus logros y su afán por hacer una contribución a su comunidad. Haciendo mejoras locales, el propósito es mejorar la situación local.</p>
+				      </div>
+				    </div>
+
+				    <div class="col s12 m4">
+				      <div class="icon-block">
+				        <h2 class="center {{brand_color}}-text"><i class="mdi-maps-terrain" style="font-size: 45px;"></i></h2>
+				        <h5 class="center">Hub Monterrey</h5>
+
+				        <p class="light">Con sede en la ciudad de Monterrey, México, el Hub Monterrey es uno de los Hubs más jóvenes y con mayor participación en los eventos del Foro. El principal objetivo del Hub es lograr influenciar y empoderar a jóvenes líderes en la comunidad de Monterrey para ser agentes de cambio.</p>
+				      </div>
+				    </div>
+
+				    <div class="col s12 m4">
+				      <div class="icon-block">
+				        <h2 class="center {{brand_color}}-text"><i class="mdi-action-language" style="font-size: 45px;"></i></h2>
+				        <h5 class="center">Foro Económico Mundial</h5>
+
+				        <p class="light">Comprometido con mejorar la situación global, el Foro es la Organización Internacional para la Cooperación Público-Privada, que se acopla con los principales políticos, empresarios y otros líderes de la sociedad para dar forma a las agendas globales, regionales e industriales.</p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="parallax-container z-depth-3">
+			    <div class="section no-pad-bot" style="  margin-top: 10%;">
+			      <div class="container">
+			        
+			        <div class="row center">
+			          <h5 class="header col s12 white-text light" style="line-height: 2;">“Cada vez somos más conscientes de que las soluciones a nuestros retos mundiales deben comprometer de forma decidida a los jóvenes, en todos los ámbitos: local, regional, nacional y globalmente. Esta generación tiene la pasión, el dinamismo y el espíritu emprendedor necesario para moldear el futuro.”<span class="light-blue-text text-lighten-2" style="cursor:pointer;"> Professor Klaus Schwab</span></h5>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="parallax"><img src="/{{theme}}/materialize/images/landing/wef.png" alt="Unsplashed background img 2" style="display: block; transform: translate3d(-50%, 386px, 0px); -webkit-filter:brightness(50%)"></div>
+			</div>
+			<div class="parallax-container" style="background-color:white">
+				<br><br>
+				<h5 class="header col s12 light center grey-text" style="line-height: 2; {% if is_mobile %} margin-bottom: 20%; {% endif %} ">Conoce a los shapers.</h5>
+				<br><br>
+			    <div class="section no-pad-bot">
+			      <div class="container">
+			        <div class="row center">
+			          <div class="row">
+			          	<div class="container center">
+			          		<div class="col s12 m8 offset-m2 l6 offset-l3">
+			          			<div class="slider" style="width:100%;">
+					                  <ul class="slides" style="background-color:transparent">
+					                  {% for sh_name, image_url in shapers %}
+											<li>
+							                  <img class="img-responsive circle tooltipped z-depth-2" src="{{image_url}}" alt="office" data-position="bottom" data-delay="50" data-tooltip="{{sh_name}}" style="max-height:200px; max-width:200px;">
+							                </li>
+					                  {% endfor %}
+					                  </ul>
+					              </div>
+			          		</div>
+			          	</div>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="parallax"></div>			    
+			</div>
+			<div class="row center" style="    background-color: white;    margin-bottom: 0px;    padding-bottom: 50px;">
+				<div class="col s12 m4 offset-m4">
+					<a href="{{ uri_for("shapers") }}" class="waves-effect waves-light shapers-blue white-text btn-large" style="font-family: roboto-medium;border-radius:40px;"> Conoce lo que hacen </a>
+				</div>
+			</div>
+		{% endblock %}
+
+		{% block modals_content %}
+		{% endblock %}
+
+		{% block footer %}
+			<!-- START FOOTER -->
+			<footer class="page-footer {{brand_color}} darken-1">
+				<a href="#"><i class="mdi-navigation-expand-less white-text right" style="padding: 10px;"></i></a>
+				<div class="container">
+				  <div class="row">
+				    <div class="col m7 s12">
+				      <h5 class="white-text">Más información</h5>
+				      <p class="grey-text text-lighten-4">Si quieres conocer más sobre el Foro Ecomómico Mundial, visita su sitio en <a href="http://www.weforum.org/community/global-shapers" target="_blank">www.weforum.org</a>. Asimismo, para conocer mejor como se conforma y cuáles son los últimos eventos de la comunidad shaper, puedes ir a <a href="http://www.globalshapers.org/" target="_blank">www.globalshapers.org</a>.</p>
+				    </div>
+				    <div class="col offset-m2 m3 s12" style="margin-top:-10px;">
+				      <ul>
+				        <li><a class="white-text" href="{{uri_for("blog")}}">Blog</a></li>
+				        <li><a class="white-text" href="{{uri_for("faq")}}">FAQ</a></li>
+				        <li><a class="white-text" href="{{uri_for("contact")}}">Contact</a></li>
+				      </ul>
+				    </div>
+				  </div>
+				</div>
+				<div class="footer-copyright " style="text-align:right;">
+				  <div class="container tooltipped" data-position="top" data-delay="50" data-tooltip="You should try the Konami-code">
+				  	<a class="white-text" href="http://mboilerplate.appspot.com">MIT License - © 2015 M Boilerplate, All rights reserved. Made from real<i class="mdi-image-flash-on white-text" style="font-size: 15px;margin-left: 3px;-webkit-animation: pulsate 3s ease-out; -webkit-animation-iteration-count: infinite;"></i></a>
+				  </div>
+				</div>
+			</footer>
+			<!-- END FOOTER -->
+			<audio id="goat" src="/default/materialize/audio/screaming_goat.mp3" volume="0.8" style="display:none;"></audio>
+			<audio id="seal" src="/default/materialize/audio/screaming_seal.mp3" volume="0.8" style="display:none;"></audio>
+		{% endblock %}
+
+	  	<!-- All Scripts start here -->
+		{% block scripts %}
+			<!-- jQuery Library -->
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/jquery-1.11.2.min.js"></script>
+		    <!--materialize js-->
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/materialize.min.js"></script>
+		    <!--scrollbar-->
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins.js"></script>
+		  	<script src="/{{theme}}/materialize/js/plugins/jquery/jquery.color-2.1.0.js"></script>
+		  	<!-- Toast Notification -->
+		    {% if messages|safe %}		    	
+			    {% for message in messages %}
+		    		<script type="text/javascript">
+		            	var resendIndex = 0 ;
+		            	var _text = "{{ message[0]|safe }}";
+		            	var _textAdditionals = "";
+						resendIndex = _text.search('resend');
+						if ( resendIndex > 0 ){
+							//this is the case when resend-activation-link is sent
+							// 1: Add this text as html to toast additionals
+							_textAdditionals = '<a class="toast-warning" href="/'+_text.substr(resendIndex).replace(/ /g,'/')+'/">Clic here if you need us to resend activation link. Previous link will be forgotten.</a>';
+							// 2: Trim this text from toast
+							_text = _text.substr(0, resendIndex-1);							
+						}
+						var _msg = '<span class="toast-{{ message[1]|safe }}">'+_text+'</span>';
+		            	Materialize.toast(_msg, 4500);
+		            	if (_textAdditionals != "") Materialize.toast(_textAdditionals, 10000);
+		            </script>
+			    {% endfor %}
+			{% endif %}	
+
+	        {% block raptor %}
+				<script src="https://hammerjs.github.io/dist/hammer.js"></script>
+				<script src="/{{ theme }}/materialize/js/plugins/raptor/raptor.js?v=5"></script>
+				<script type="text/javascript">
+					$(window).load(function() {
+						$('body').raptorize({
+							'enterOn' : 'konami-code'
+						});
+					});
+				</script>
+			{% endblock %}
+	        
+	        {% block onload_methods %}
+				<script type="text/javascript">
+	    			var is_Safari = false, not_Chrome = false;
+					$(function(){						
+
+						$('a[href*=#]:not([href=#])').click(function() {
+						    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+						      var target = $(this.hash);
+						      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+						      if (target.length) {
+						        $('html,body').animate({
+						          scrollTop: target.offset().top
+						        }, 2000);
+						        return false;
+						      }
+						    }
+						});
+					    $('.button-collapse').sideNav({
+					      edge: 'right'
+					    });
+						$('.modal-trigger').leanModal();
+						$('.tooltipped').tooltip({delay: 50});
+					    $('.parallax').parallax();
+					    
+						$(".menu-item").click(function(){
+							$('.button-collapse').sideNav('hide');
+						});
+
+						var body = document.body,html = document.documentElement;
+						var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+						var scroll_pos = 0;
+					    var animation_begin_pos = 500;
+					    var animation_end_pos = height;
+					    var original_color = new $.Color( 'rgba(0,0,0,0)' );
+					    var beginning_color = new $.Color( 'rgb(255, 255, 255)' );
+					    var ending_color = new $.Color( 'rgb(255, 255, 255)' );
+					    $(document).scroll(function() {
+					        scroll_pos = $(this).scrollTop(); 
+					        if(scroll_pos >= animation_begin_pos && scroll_pos <= animation_end_pos ) { 
+					            var percentScrolled = scroll_pos / ( animation_end_pos - animation_begin_pos );
+					            var newRed = beginning_color.red() + ( ( ending_color.red() - beginning_color.red() ) * percentScrolled );
+					            var newGreen = beginning_color.green() + ( ( ending_color.green() - beginning_color.green() ) * percentScrolled );
+					            var newBlue = beginning_color.blue() + ( ( ending_color.blue() - beginning_color.blue() ) * percentScrolled );
+					            var newColor = new $.Color( newRed, newGreen, newBlue );
+					            $('nav').animate({ backgroundColor: newColor }, 0);
+					        } else if ( scroll_pos > animation_end_pos ) {
+					            $('nav').animate({ backgroundColor: ending_color }, 0);
+					        } else if ( scroll_pos < animation_begin_pos && scroll_pos > 0) {
+					        } else { 
+					            $('nav').animate({ backgroundColor: original_color }, 0);
+
+					        }
+					    });
+
+						var BrowserDetect = {
+							init: function() {
+								this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+								this.version = this.searchVersion(navigator.userAgent) || this.searchVersion(navigator.appVersion) || "an unknown version";
+								this.OS = this.searchString(this.dataOS) || "an unknown OS";
+								console.log("Detected " + this.browser + " v." + this.version + " running {{app_name}} in a " + this.OS);
+								if (this.browser != 'Chrome' && this.browser.indexOf('Safari') == -1 && this.browser.indexOf('iPhone') == -1 && this.browser != 'Firefox') {
+									alert("Sorry, this is a system for the future, use Google Chrome.");
+								}
+								else if (this.browser.indexOf("Safari") != -1)
+									is_Safari = true;
+								else if (this.browser.indexOf("Chrome") == -1)
+									not_Chrome = true;
+							},
+							searchString: function(data) {
+								for (var i = 0; i < data.length; i++) {
+									var dataString = data[i].string;
+									var dataProp = data[i].prop;
+									this.versionSearchString = data[i].versionSearch || data[i].identity;
+									if (dataString) {
+										if (dataString.indexOf(data[i].subString) != -1) return data[i].identity;
+									} else if (dataProp) return data[i].identity;
+								}
+							},
+							searchVersion: function(dataString) {
+								var index = dataString.indexOf(this.versionSearchString);
+								if (index == -1) return;
+								return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
+							},
+							dataBrowser: [{
+								string: navigator.userAgent,
+								subString: "Chrome",
+								identity: "Chrome"
+							}, {
+								string: navigator.userAgent,
+								subString: "OmniWeb",
+								versionSearch: "OmniWeb/",
+								identity: "OmniWeb"
+							}, {
+								string: navigator.vendor,
+								subString: "Apple",
+								identity: "Safari",
+								versionSearch: "Version"
+							}, {
+								prop: window.opera,
+								identity: "Opera",
+								versionSearch: "Version"
+							}, {
+								string: navigator.vendor,
+								subString: "iCab",
+								identity: "iCab"
+							}, {
+								string: navigator.vendor,
+								subString: "KDE",
+								identity: "Konqueror"
+							}, {
+								string: navigator.userAgent,
+								subString: "Firefox",
+								identity: "Firefox"
+							}, {
+								string: navigator.vendor,
+								subString: "Camino",
+								identity: "Camino"
+							}, { // for newer Netscapes (6+)
+								string: navigator.userAgent,
+								subString: "Netscape",
+								identity: "Netscape"
+							}, {
+								string: navigator.userAgent,
+								subString: "MSIE",
+								identity: "Explorer",
+								versionSearch: "MSIE"
+							}, {
+								string: navigator.userAgent,
+								subString: "Gecko",
+								identity: "Mozilla",
+								versionSearch: "rv"
+							}, { // for older Netscapes (4-)
+								string: navigator.userAgent,
+								subString: "Mozilla",
+								identity: "Netscape",
+								versionSearch: "Mozilla"
+							}],
+							dataOS: [{
+								string: navigator.platform,
+								subString: "Win",
+								identity: "Windows"
+							}, {
+								string: navigator.platform,
+								subString: "Mac",
+								identity: "Mac"
+							}, {
+								string: navigator.userAgent,
+								subString: "iPhone",
+								identity: "iPhone/iPod"
+							}, {
+								string: navigator.platform,
+								subString: "Linux",
+								identity: "Linux"
+							}]
+						};
+						BrowserDetect.init();	
+					}); 
+
+					
+				</script>
+			{% endblock %}
+
+			{% if locale_language_id != "en" %}
+				{% if locale_iso.language == "pt" and locale_iso.territory == "BR" %}
+					<script src="/boilerplate/js/libs/jquery_validation/localization/messages_{{ locale_iso.language }}_{{ locale_iso.territory }}.js"></script>
+				{% else %}
+					<script src="/boilerplate/js/libs/jquery_validation/localization/messages_{{ locale_language_id }}.js"></script>
+				{% endif %}
+			{% endif %}
+
+			{% block page_scripts %}{% endblock %}			
+		{% endblock %}
+
+	</body>        
+{% endblock %}
+</html>
