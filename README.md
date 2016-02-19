@@ -2,6 +2,8 @@
 
 *The materialize boilerplate project is an amazing fusion from material design, polymer web components, and boilerplate framework for easy and quick deployments of web applications on the Google Cloud Platform.*
 
+##Live demo: [MBoilerplate](http://mboilerplate.appspot.com) - [Shapers Site](http://shapersmty.appspot.com)
+
 ###What's Materialize?
 Materialize simplifies life for developers and the users they serve. It speeds up development, heavy lifting has been done for you to provide a smoother experience for visitors. ([showcase](http://materializecss.com/showcase.html))
 
