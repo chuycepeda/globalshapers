@@ -20,6 +20,7 @@
     <thead>
         <tr>
             <th class="col m1">Edit</th>
+            <th class="col m1">Delete</th>
             {% for attr, when in list_columns %}
             <th>
                 {{ when|safe }}
@@ -31,6 +32,9 @@
     <tr>
         <td>
             <a class="icon" href="{{ uri_for('admin-shaper-edit', shaper_id=shaper.get_id()) }}"><span style="margin-left: 8px;">✎</span></a>
+        </td>
+        <td>
+            <a class="icon" href="{{ uri_for('admin-shaper-delete', shaper_id=shaper.get_id()) }}"><span style="margin-left: 8px;">x</span></a>
         </td>
         {% for attr, when in list_columns %}
         <td>

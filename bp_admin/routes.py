@@ -31,6 +31,7 @@ _routes = [
     RedirectRoute('/admin/shapers/', shapers.AdminShapersHandler, name='admin-shapers', strict_slash=True),
     RedirectRoute('/admin/shapers/new/', shapers.AdminNewShaperHandler, name='admin-shapers-new', strict_slash=True),
     RedirectRoute('/admin/shapers/<shaper_id>/', shapers.AdminShaperEditHandler, name='admin-shaper-edit', strict_slash=True),
+    RedirectRoute('/admin/shapers/delete/<shaper_id>/', shapers.AdminShaperDeleteHandler, name='admin-shaper-delete', strict_slash=True),
 
 ]
 

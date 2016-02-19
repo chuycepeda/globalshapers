@@ -102,13 +102,11 @@
 				  <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-more-vert"></i></a>
 				  <ul id="nav-mobile" class="right hide-on-med-and-down">
 				    <li id="nav-shapers"><a href="{{uri_for("shapers")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Shapers</a></li>
-				    <li id="nav-blog"><a href="{{uri_for("blog")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Blog</a></li>
-				    <li id="nav-medium"><a href="https://medium.com/search?q=Globalshapermty" target="_blank" class="modal-trigger menu-item" style="color:#1C5A9A">Medium</a></li>
+				    <li id="nav-medium"><a href="https://medium.com/@globalshapermty" target="_blank" class="modal-trigger menu-item" style="color:#1C5A9A">Blog</a></li>
 				  </ul>
 				  <ul class="side-nav" id="mobile-demo">
 				    <li id="nav-shapers"><a href="{{uri_for("shapers")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Shapers</a></li>
-				    <li id="nav-blog"><a href="{{uri_for("blog")}}" class="modal-trigger menu-item" style="color:#1C5A9A">Blog</a></li>
-				    <li id="nav-medium"><a href="https://medium.com/search?q=Globalshapermty" target="_blank" class="modal-trigger menu-item" style="color:#1C5A9A">Medium</a></li>
+				    <li id="nav-medium"><a href="https://medium.com/@globalshapermty" target="_blank" class="modal-trigger menu-item" style="color:#1C5A9A">Blog</a></li>
 				  </ul>
 				</div>
 			</nav>
@@ -175,7 +173,7 @@
 			      <div class="container">
 			        
 			        <div class="row center">
-			          <h5 class="header col s12 white-text light" style="line-height: 2;">“Cada vez somos más conscientes de que las soluciones a nuestros retos mundiales deben comprometer de forma decidida a los jóvenes, en todos los ámbitos: local, regional, nacional y globalmente. Esta generación tiene la pasión, el dinamismo y el espíritu emprendedor necesario para moldear el futuro.”<span class="light-blue-text text-lighten-2" style="cursor:pointer;"> Professor Klaus Schwab</span></h5>
+			          <h5 class="header col s12 white-text light" style="line-height: 2;">“Cada vez somos más conscientes de que las soluciones a nuestros retos mundiales deben comprometer de forma decidida a los jóvenes, en todos los ámbitos{% if not is_mobile %}: local, regional, nacional y globalmente. Esta generación tiene la pasión, el dinamismo y el espíritu emprendedor necesario para moldear el futuro.{% else %}.{% endif %}”<span class="light-blue-text text-lighten-2" style="cursor:pointer;"> Professor Klaus Schwab</span></h5>
 			        </div>
 			      </div>
 			    </div>
@@ -210,7 +208,7 @@
 			</div>
 			<div class="row center" style="    background-color: white;    margin-bottom: 0px;    padding-bottom: 50px;">
 				<div class="col s12 m4 offset-m4">
-					<a href="{{ uri_for("shapers") }}" class="waves-effect waves-light shapers-blue white-text btn-large" style="font-family: roboto-medium;border-radius:40px;"> Conoce lo que hacen </a>
+					<a href="{{ uri_for("shapers") }}" class="waves-effect waves-light shapers-blue white-text btn-large" style="font-family: roboto-medium;border-radius:40px;"> Conócelos</a>
 				</div>
 			</div>
 		{% endblock %}
@@ -230,9 +228,8 @@
 				    </div>
 				    <div class="col offset-m2 m3 s12" style="margin-top:-10px;">
 				      <ul>
-				        <li><a class="white-text" href="{{uri_for("blog")}}">Blog</a></li>
-				        <li><a class="white-text" href="{{uri_for("faq")}}">FAQ</a></li>
-				        <li><a class="white-text" href="{{uri_for("contact")}}">Contact</a></li>
+				        <li><a class="white-text" href="{{uri_for("shapers")}}">Shapers</a></li>
+				        <li><a class="white-text" href="https://medium.com/@globalshapermty">Blog</a></li>
 				      </ul>
 				    </div>
 				  </div>

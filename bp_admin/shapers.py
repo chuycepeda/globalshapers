@@ -135,3 +135,12 @@ class AdminShaperEditHandler(BaseHandler):
         except:
             self.add_message(messages.saving_error, 'danger')
             return self.get(shaper_id = shaper.key.id())
+
+class AdminShaperDeleteHandler(BaseHandler):
+    def get(self, shaper_id):
+        if shaper_id != 1:
+            shaper = models.Shapers.get_by_id(long(shaper_id))
+            if shaper is not None:
+                shaper.key.delete()
+            self.add_message(messages.saving_success, 'success')
+        return self.redirect_to('admin-shapers')
